@@ -18,7 +18,7 @@ public class Main {
             Map.Entry<String,String> mapEntry = it.next();
             System.out.println(mapEntry.getKey()+": "+mapEntry.getValue());
         }
-        ReentrantLock
+        ReentrantLock lock = new ReentrantLock();
 
         }
     }
