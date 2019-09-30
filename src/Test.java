@@ -1,6 +1,5 @@
 
 //用两个线程交替打印奇数和偶数
-
 /**
  * 用同步方法的方式，分为两个任务，注意 对象名::方法名的使用
  */
@@ -45,10 +44,12 @@
 }*/
 
 
+import test.TaoBaoCaseInterview;
+
 /**
  * 使用volatile+synchronized变量的方式
  */
-public class Test {
+/*public class Test {
   private volatile int num;
 
   public static void main(String[] args) {
@@ -71,6 +72,50 @@ public class Test {
         e.printStackTrace();
       }
     }
+  }
+}*/
+class A implements Runnable
+{
+  public  static int tickets = 100;
+  String str = new String("哈哈");
+
+  public void run()
+  {
+    while(true)
+    {
+      synchronized(str)
+      {
+        if(tickets > 0)
+        {
+          System.out.printf(" %s is selling tickets:%d\n",Thread.currentThread().getName(),tickets);
+          --tickets;
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+        else
+        {
+          break;
+        }
+      }
+    }
+  }
+}
+
+
+public class Test
+{
+  public  static void main(String[] args)
+  {
+
+    A aa = new A();
+    Thread t1 = new Thread(aa);
+    t1.start();
+
+    Thread t2 = new Thread(aa);
+    t2.start();
   }
 }
 
